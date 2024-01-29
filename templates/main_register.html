@@ -30,14 +30,16 @@
         <div class="clr"></div>
       </div>
       <div class="menu_nav">
-        <div class="registr">
-          <ul>
-            <!-- <button type="button">Join up</button>
-            <button type="button">Join in</button> -->
-            <li><a href="{% url 'register_up' %}">Sign up</a></li>
-            <li><a href="{% url 'register_in' %}">Sign in</a></li>
-          </ul>
-        </div>
+          <div class="registr">
+            <ul>
+              <!-- <button type="button">Join up</button>
+              <button type="button">Join in</button> -->
+              <!-- <li><a href="{% url 'home' %}">Sign up</a></li>
+              <li><a href="{% url 'home' %}">Sign in</a></li> -->
+              {% block register %}
+              {% endblock %}
+            </ul>
+          </div>
       </div>
       <div class="clr"></div>
       <!-- <div class="menu_nav">
