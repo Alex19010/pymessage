@@ -7,8 +7,8 @@
 
 
 {% block register %}
-    <li class="active"><a href="{% url 'register_up' %}">Sign up</a></li>
-    <li><a href="{% url 'register_in' %}">Sign in</a></li>
+  <li><a href="{% url 'register_in' %}">Sign in</a></li>
+  <li class="active"><a href="{% url 'register_up' %}">Sign up</a></li>
 {% endblock %}
 
 
@@ -28,12 +28,13 @@
       <div class="article">
         <h2><span>Sign</span> up</h2>
         <div class="clr"></div>
+        {{form.errors}}
         <form action="#" method="post" id="sendemail">
             {% csrf_token %}
           <ol>
             <li>
               <label for="first_name">First name (required)</label>
-              <input id="first_name" name="first_namename" class="text" />
+              <input id="first_name" name="first_name" class="text" />
             </li>
             <li>
               <label for="last_name">Last name (required)</label>

@@ -8,8 +8,8 @@ from .models import User
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(max_length=50, widget=forms.PasswordInput(), validators=[validate_password])
-    password_confirm = forms.CharField(max_length=50, widget=forms.PasswordInput(), validators=[validate_password])
+    password = forms.CharField(max_length=50, widget=forms.PasswordInput())
+    password_confirm = forms.CharField(max_length=50, widget=forms.PasswordInput())
 
     class Meta:
         model = User
@@ -23,4 +23,4 @@ class UserRegistrationForm(forms.ModelForm):
         if password != password_confirm:
             raise ValidationError(message={"password":"Пароли не совпали!"}) 
 
-        return super().clean()
+        super().clean()
