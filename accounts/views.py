@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 from .models import User
 from .form import UserRegistrationForm
-from django.contrib.auth import authenticate, login
 
 
 def home(request):
@@ -36,7 +37,7 @@ def register_up(request):
             )
             user.set_password(raw_password=form.cleaned_data['password']) # хешируем пароль пользователя
             user.save() # сохранение пользователя
-            return redirect("accounts:register_in") # перенаправление пользователя на страницу авторизации
+            return redirect("register_up.html") # перенаправление пользователя на страницу авторизации
     
     context = { # определение контекса
         "form": form
@@ -61,7 +62,9 @@ def register_in(request):
     return render(request=request, template_name="register_in.html")
 
 
-
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 # def register_in(request):

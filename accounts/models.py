@@ -14,8 +14,8 @@ class User(AbstractUser):
     address = models.CharField(verbose_name = "Address", max_length = 250, null = True, blank = True)
 
     class Meta:
-        verbose_name = "Name"
-        verbose_name_plural = "Names"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
 
     def __str__(self):
-        return self.username
+        return f"{self.username}"
