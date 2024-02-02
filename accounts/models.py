@@ -21,6 +21,6 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.username}"
 
-    def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields = ...) -> None: #Iterable[str] | None = ...:
+    def save(self, *args, **kwargs) -> None: #Iterable[str] | None = ...:
         self.username = set_random_username()
-        return super().save(force_insert, force_update, using, update_fields)
+        return super().save(*args, **kwargs)

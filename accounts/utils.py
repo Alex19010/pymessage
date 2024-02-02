@@ -6,9 +6,9 @@ def is_username_unique(username):
     User = get_user_model()
     try:
         user = User.objects.get(username=username)
-        return True
-    except User.DoesNotExist:
         return False
+    except User.DoesNotExist:
+        return True
 
 
 def set_random_username():

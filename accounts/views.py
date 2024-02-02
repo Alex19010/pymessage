@@ -37,7 +37,8 @@ def register_up(request):
             )
             user.set_password(raw_password=form.cleaned_data['password']) # хешируем пароль пользователя
             user.save() # сохранение пользователя
-            return redirect("register_up.html") # перенаправление пользователя на страницу авторизации
+            login(request, user)
+            return redirect("home") # перенаправление пользователя на страницу авторизации
     
     context = { # определение контекса
         "form": form
@@ -50,10 +51,10 @@ def register_in(request):
     if request.method == "POST": # получаем POST запрос с его данными
         email = request.POST.get("email") # достаём из запроса username
         password = request.POST.get("password") # достаём из запроса password
-        user = authenticate(request, email=email, password=password) # проверяем username и password на существование
+        user = authenticate(request, username=email, password=password) # проверяем username и password на существование
         if user is not None: # Если пользователь с таким username и password найден
             login(request, user) # авторизуем пользователя
-            return redirect("home.html") # перенаправляем его на главную страницу
+            return redirect("home") # перенаправляем его на главную страницу
         
         context = {
             "error": "Ошибка! Проверьте username и password!"
