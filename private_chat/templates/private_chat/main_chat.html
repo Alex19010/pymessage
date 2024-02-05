@@ -6,6 +6,8 @@
 <title>{% block title %}{% endblock %}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/chat_style.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'font-awesome-4.7.0\css\font-awesome.min.css' %}">
 <script type="text/javascript" src="{% static 'js/jquery-1.3.2.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cufon-yui.js' %}"></script>
@@ -107,8 +109,8 @@
             <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-              <li class="active"><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="{% url 'private_chat' %}">Message</a></li>
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li class="active"><a href="{% url 'private_chat' %}">Message</a></li>
               <li><a href="#">Style Demo</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="#">Archives</a></li>
@@ -126,8 +128,8 @@
               <li><a href="#">Fringilla velit magna</a> Cras id urna orbi tincidunt orci ac</li>
               <li><a href="#">Suspendisse bibendum</a> purus nec placerat bibendum</li>
             </ul>
-          </div> -->
-          <!-- <div class="gadget">
+          </div>
+          <div class="gadget">
             <h2 class="star"><span>Wise Words</span></h2>
             <div class="clr"></div>
             <div class="testi">
