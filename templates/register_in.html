@@ -1,4 +1,5 @@
 {% extends 'main_register.html' %}
+{% load static %}
 
 
 {% block title %}
@@ -36,11 +37,15 @@
               <input id="email" name="email" class="text" />
             </li>
             <li>
+              <label for="username">Username (required)</label>
+              <input id="username" name="username" class="text" />
+            </li>
+            <li>
               <label for="password">Password (required)</label>
               <input id="password" name="password" class="password" />
             </li>
             <li>
-              <input type="image" name="imageField" id="imageField" src="{{ images.submit.gif }}" class="send" />
+              <input type="image" name="imageField" id="imageField" src="{% static 'images/submit.gif' %}" class="send" />
               <div class="clr"></div>
             </li>
           </ol>
