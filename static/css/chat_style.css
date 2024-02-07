@@ -269,10 +269,11 @@ body {
 .footer-chat {
     /* width: calc(65% - 66px); */
     width: 485px;
-    height: 30px;
+    height: 70px;
     display:flex;
     align-items: center;
     position:absolute;
+    top: 800px;
     bottom: 0;
     background-color: transparent;
     border-top: 2px solid #EEE;    
@@ -282,6 +283,8 @@ body {
     margin-left: 30px;
     color:#C0C0C0;
     font-size: 14pt;
+    /* position: absolute; */
+    /* top: 13px; */
 }
   
 .chat .footer-chat .send {
@@ -289,6 +292,7 @@ body {
     background-color: #4f6ebd;
     position: absolute;
     right: 50px;
+    /* top: 13px; */
     padding: 12px 12px 12px 12px;
     border-radius: 50px;
     font-size: 14pt;
@@ -313,6 +317,8 @@ body {
     height: 50px;
     margin-left: 20px;
     padding: 10px;
+    /* position: absolute; */
+    /* align-items: center; */
 }
   
 .footer-chat *::-webkit-input-placeholder {
