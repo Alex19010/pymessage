@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import PrivateChat, PrivateMessage
+
+
+class MessageInline(admin.StackedInline):
+    model = PrivateMessage
+    extra = 1
+
+@admin.register(PrivateChat)
+class AdminChat(admin.ModelAdmin):
+    list_display = ("id",)
+    inlines = (MessageInline,)

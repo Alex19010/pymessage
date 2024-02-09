@@ -144,4 +144,4 @@ LOGOUT_REDIRECT_URL = 'home'
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 
 
-LOGIN_URL = reverse_lazy("register_in/")
+LOGIN_URL = reverse_lazy("register_in")

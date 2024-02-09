@@ -20,8 +20,11 @@ def private_chat(request):
 #     messages = sorted(messages, key=lambda x: x.timestamp)  # Сортируем сообщения по времени
 #     return render(request, 'chat.html', {'messages': messages})
 
-
+@login_required()
 def chat_view(request):
     private_chats = PrivateChat.objects.filter(members=request.user)
-    messages = PrivateMessage.objects.filter(chat__in=private_chats).order_by('timestamp')
-    return render(request, 'chat.html', {'messages': messages})
+    # messages = PrivateMessage.objects.filter(chat__in=private_chats).order_by('timestamp')
+    context = {
+        "chats": private_chats
+    }
+    return render(request, 'private_chat/chat_private_chat.html', context)

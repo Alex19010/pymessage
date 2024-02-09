@@ -13,7 +13,7 @@
 {% block content %}
 
 <body>
-    <div class="container">
+    <div class="container" style="width: 1000px;">
       <div class="row">
         <!-- <nav class="menu">
           <ul class="items">
@@ -37,14 +37,15 @@
             </li>
           </ul>
         </nav> -->
-  
-        <section class="discussions">
+      
+        <section class="discussions" style="width: 250px;">
           <div class="discussion search">
             <div class="searchbar">
               <i class="fa fa-search" aria-hidden="true"></i>
               <input type="text" placeholder="Search..."></input>
             </div>
           </div>
+
           <div class="discussion message-active">
             <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
               <div class="online"></div>
@@ -55,19 +56,25 @@
             </div>
             <div class="timer">12 sec</div>
           </div>
-  
-          <div class="discussion">
-            <div class="photo" style="background-image: url(https://i.pinimg.com/originals/a9/26/52/a926525d966c9479c18d3b4f8e64b434.jpg);">
-              <div class="online"></div>
+          
+          {% for chat in chats %}
+          <div class="discussion" >
+            <div class="photo" style="background-image: url({{ chat.members.first.avatar.url }});">
+              <!-- <div class="online"></div> -->
             </div>
             <div class="desc-contact">
-              <p class="name">Dave Corlew</p>
-              <p class="message">Let's meet for a coffee or something today ?</p>
+              <p class="name">{{ chat.members.first.first_name }}</p>
+              <p class="message">{{ chat.messages.last.content }}</p>
             </div>
-            <div class="timer">3 min</div>
+            <div class="timer">{{ chat.messages.last.timestamp }}</div>
           </div>
-  
-          <div class="discussion">
+          {% endfor %}
+          <div class="footer-chat" style="margin-left: 300px; width: 600px;">
+            <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
+            <input type="text" class="write-message" placeholder="Type your message here" style="width: 550px;"></input>
+            <i class="icon send fa fa-paper-plane-o clickable" aria-hidden="true"></i>
+          </div>
+          <!-- <div class="discussion">
             <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);">
             </div>
             <div class="desc-contact">
@@ -126,7 +133,7 @@
             <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
           </div>
           <div class="messages-chat">
-            <div class="message">
+            <div class="message"> -->
 
               <!-- <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
                 <div class="online"></div>
@@ -134,15 +141,15 @@
 
               <!-- <p class="text"> Hi, how are you ? </p> -->
 
-            </div>
+            <!-- </div> -->
 
             <!-- <div id="chat-messages"> -->
-              {% for message in messages %}
+              <!-- {% for message in messages %}
                 <div class="message text-only">
                   <p><strong>{{ message.sender.username }}</strong>: {{ message.content }}</p>
                   <p>{{ message.timestamp }}</p>
                 </div>
-              {% endfor %}
+              {% endfor %} -->
             <!-- </div> -->
 
             <!-- <div class="message text-only">
@@ -168,11 +175,6 @@
             </div>
             <p class="time"> 15h09</p> -->
 
-          </div>
-          <div class="footer-chat">
-            <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
-            <input type="text" class="write-message" placeholder="Type your message here"></input>
-            <i class="icon send fa fa-paper-plane-o clickable" aria-hidden="true"></i>
           </div>
         </section>
       </div>
