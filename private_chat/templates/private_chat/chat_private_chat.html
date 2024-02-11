@@ -60,7 +60,6 @@
           {% for chat in chats %}
           <div class="discussion" >
             <div class="photo" style="background-image: url({{ chat.members.first.avatar.url }});">
-              <!-- <div class="online"></div> -->
             </div>
             <div class="desc-contact">
               <p class="name">{{ chat.members.first.first_name }}</p>
@@ -69,11 +68,20 @@
             <div class="timer">{{ chat.messages.last.timestamp }}</div>
           </div>
           {% endfor %}
+          {% for chat in chats %}
+          <div class="message text-only">
+            <div class="response">
+              <p class="text">{{ chat.messages.content }}</p>
+            </div>
+          </div>
+          <p class="time">{{ chat.messages.timestamp }}</p>
+          {% endfor %}
           <div class="footer-chat" style="margin-left: 300px; width: 600px;">
             <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
             <input type="text" class="write-message" placeholder="Type your message here" style="width: 550px;"></input>
             <i class="icon send fa fa-paper-plane-o clickable" aria-hidden="true"></i>
           </div>
+          <!-- <div class="online"></div> -->
           <!-- <div class="discussion">
             <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);">
             </div>
