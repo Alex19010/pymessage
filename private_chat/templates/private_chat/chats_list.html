@@ -1,0 +1,29 @@
+<section class="discussions" style="width: 250px;">
+    <div class="discussion search">
+      <div class="searchbar">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" placeholder="Search..."></input>
+      </div>
+    </div>
+
+  
+    {% for chat in chats %}
+    <a href="{% url 'one_private_chat' chat_id=chat.id  %}">
+      {% for member in chat.members.all %}
+        {% if member != request.user %}
+        <div class="discussion" >
+          <div class="photo" style="background-image: url({{ member.avatar.url }});">
+          </div>
+          <div class="desc-contact">
+            <p class="name">{{ member.first_name }}</p>
+            <p class="message">{{ chat.messages.last.content }}</p>
+          </div>
+          <div class="timer">{{ chat.messages.last.timestamp }}</div>
+        </div>
+        {% endif %}
+      {% endfor %}
+      
+    </a>
+    {% endfor %}
+    
+  </section>
