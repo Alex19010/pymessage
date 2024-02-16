@@ -68,16 +68,16 @@
             <div class="timer">{{ chat.messages.last.timestamp }}</div>
           </div>
           {% endfor %}
-          {% for chat in chats %}
-            {% for message in chat.messages.all %}
-              <div class="message text-only">
-                  <div class="response">
-                      <p class="text">{{ message.content }}</p>
-                  </div>
-                  <p class="time">{{ message.timestamp }}</p>
-              </div>
-            {% endfor %}
-          {% endfor %}
+
+        {% for message in chat.messages.all %}
+        <div class="message text-only">
+            <div class="response">
+                <p class="text">{{ message.content }}</p>
+            </div>
+            <p class="time">{{ message.timestamp }}</p>
+        </div>
+        {% endfor %}
+        
           <form id="content" action="{% url 'save_message' %}" method="post">
             {% csrf_token %}
                 <div class="footer-chat" style="margin-left: 300px; width: 600px;">

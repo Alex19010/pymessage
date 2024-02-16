@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('chats/', include('private_chat.urls')),
+    path('grch/', include('group_chat.urls')),
 ]
 
 if settings.DEBUG:

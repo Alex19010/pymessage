@@ -265,7 +265,7 @@ body {
 .response .text {
     background-color: #e3effd !important;
 }
-  row
+
 .footer-chat {
     /* width: calc(65% - 66px); */
     width: 485px;
@@ -276,7 +276,7 @@ body {
     top: 800px;
     bottom: 0;
     background-color: transparent;
-    border-top: 2px solid #EEE;    
+    border-top: 2px solid #EEE;
 }
   
 .chat .footer-chat .icon {
@@ -342,3 +342,7 @@ body {
 .clickable {
     cursor: pointer;
 }
+
+/* .left_priv {
+    float: right;
+} */
