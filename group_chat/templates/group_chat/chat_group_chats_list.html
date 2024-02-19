@@ -12,9 +12,10 @@
 
         <div class="discussion">
             <div class="desc-contact">
-                <p class="name">{{ chat.name }}</p>
-                <p class="message">{{ chat.messages.last.content }}</p>
+              <div class="photo" style="background-image: url({{ chat.avatar.url }});">
+              </div>            
             </div>
+            <p class="name">{{ chat.short_name }}</p>
             <div class="timer">{{ chat.messages.last.timestamp }}</div>
         </div>
       

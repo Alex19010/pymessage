@@ -24,13 +24,17 @@
 
         <section class="chat" style="width: 600px; margin-right: 100px;">
           <div class="header-chat">
-            {% for chat in chats %}
               <div class="photo">
-                <img src="{{ member.avatar.url }}" style="width: 50px;">
+                <img src="{{ chat.avatar.url }}" style="width: 50px;">
               </div>
               <p class="name">{{chat.name}}</p>
               <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
-            {% endfor %}
+              {% for member in members %}
+              <div class="photo">
+                <img src="{{ member.avatar.url }}" style="width: 50px; padding-left: 30px;">
+              </div>
+              {% endfor %}
+              <button onclick="copyLink('{{ link }}')">Copy invite link</button>
           </div>
           <div class="messages-chat" style="padding: 20px">
 
@@ -77,5 +81,13 @@
     </div>
   </body>
 
-
+<script>
+  function copyLink(link) {
+    console.log(link);
+    navigator.clipboard.writeText(link);
+    alert("Link copied! " + link)
+  }
+</script>
 {% endblock %}
+
+http://127.0.0.1:8000/group_chats/group_chat/invite/MQ.f-rqgL_WG3DlNG7YWC7WNBD4d0s
