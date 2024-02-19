@@ -7,6 +7,7 @@ class MessageInline(admin.StackedInline):
     model = PrivateMessage
     extra = 1
 
+
 @admin.register(PrivateChat)
 class AdminChat(admin.ModelAdmin):
     list_display = ("id",)

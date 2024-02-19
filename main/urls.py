@@ -24,8 +24,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
-    path('chats/', include('private_chat.urls')),
-    path('grch/', include('group_chat.urls')),
+    path('private_chats/', include('private_chat.urls')),
+    path('group_chats/', include('group_chat.urls')),
 ]
 
 if settings.DEBUG:

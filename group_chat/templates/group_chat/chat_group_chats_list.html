@@ -1,0 +1,24 @@
+<section class="discussions" style="width: 250px;">
+    <div class="discussion search">
+      <div class="searchbar">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" placeholder="Search..."></input>
+      </div>
+    </div>
+
+  
+    {% for chat in chats %}
+    <a href="{% url 'one_group_chat' chat_id=chat.id  %}">
+
+        <div class="discussion">
+            <div class="desc-contact">
+                <p class="name">{{ chat.name }}</p>
+                <p class="message">{{ chat.messages.last.content }}</p>
+            </div>
+            <div class="timer">{{ chat.messages.last.timestamp }}</div>
+        </div>
+      
+    </a>
+    {% endfor %}
+    
+  </section>

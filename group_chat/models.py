@@ -8,9 +8,9 @@ class GroupChat(models.Model):
     members = models.ManyToManyField(User, related_name='group_chats')
     name = models.CharField(verbose_name='Name' ,max_length=150)
 
-class Meta:
-    verbose_name = 'Group chat'
-    verbose_name_plural = 'Group chats'
+    class Meta:
+        verbose_name = 'Group chat'
+        verbose_name_plural = 'Group chats'
 
 
 class GroupMessage(models.Model):
@@ -19,6 +19,6 @@ class GroupMessage(models.Model):
     content = models.TextField(verbose_name='Message')
     timestamp = models.DateTimeField(verbose_name='Time' ,auto_now_add=True)
 
-class Meta:
-    verbose_name = 'Group message'
-    verbose_name_plural = 'Group messages'
+    class Meta:
+        verbose_name = 'Group message'
+        verbose_name_plural = 'Group messages'
