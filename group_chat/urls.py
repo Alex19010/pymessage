@@ -9,4 +9,5 @@ urlpatterns = [
 
     path('group_chat/save/<int:chat_id>/', views.save_message_view, name='save_message'),
     path('group_chat/invite/<str:code>', views.add_to_group_by_invite_link, name='add_to_group'),
+    path('create_group_chat/', views.create_group_chat, name='create_group_chat'),
 ]

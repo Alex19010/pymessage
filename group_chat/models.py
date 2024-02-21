@@ -22,7 +22,7 @@ class GroupMessage(models.Model):
     chat = models.ForeignKey(GroupChat, on_delete=models.CASCADE, related_name='messages')
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(verbose_name='Message')
-    timestamp = models.DateTimeField(verbose_name='Time' ,auto_now_add=True)
+    timestamp = models.DateTimeField(verbose_name='Time', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Group message'

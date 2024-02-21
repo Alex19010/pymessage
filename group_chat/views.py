@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 
 from .models import GroupChat, GroupMessage
 from .utils import encrypt_chat_id, decrypt_chat_id
+from .forms import GroupChatForm
 
 
 @login_required()
@@ -24,7 +25,6 @@ def chat_view(request):
 def chat_one_view(request, chat_id):
     group_chats = GroupChat.objects.filter(members=request.user)
     chat = get_object_or_404(GroupChat, id=chat_id, members=request.user)
-
     code = encrypt_chat_id(chat_id=chat.id)
     context = {
         "chats": group_chats,
@@ -39,13 +39,10 @@ def chat_one_view(request, chat_id):
 def save_message_view(request, chat_id):
     if request.method == 'POST':
         message_content = request.POST.get('message_content')
-        # Создайте новое сообщение и сохраните его
         chat = get_object_or_404(GroupChat, id=chat_id)
         new_message = GroupMessage.objects.create(chat=chat, sender=request.user, content=message_content)
         new_message.save()
         return redirect(request.META.get('HTTP_REFERER', '/'))
-    # else:
-    #     return redirect('error_page')  # Если метод запроса не POST, перенаправьте пользователя на страницу ошибки
 
 
 @login_required
@@ -57,3 +54,17 @@ def add_to_group_by_invite_link(request, code):
     chat.members.add(user)
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@login_required
+def create_group_chat(request):
+    if request.method == 'POST':
+        form = GroupChatForm(request.POST)
+        if form.is_valid():
+            group_chat = form.save()
+            # Дополнительные действия, если необходимо
+            # return redirect('success_page')  # Перенаправляем пользователя на страницу успеха
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        form = GroupChatForm()
+    return render(request, 'group_chat/chat_group_chat_one.html', {'form': form})
