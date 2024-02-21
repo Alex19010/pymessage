@@ -28,12 +28,6 @@
           <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  />
           </span>
         </form>
-        <h1>Create Group Chat</h1>
-        <form method="post" action="{% url 'create_group_chat' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Create Group Chat</button>
-        </form>
         <!--/searchform -->
         <div class="clr"></div>
       </div>

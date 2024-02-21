@@ -29,7 +29,7 @@ def chat_one_view(request, chat_id):
     context = {
         "chats": group_chats,
         "chat": chat,
-        "members": list(chat.members.all())[:4],
+        "members": list(chat.members.all())[:5],
         "link": f"http://127.0.0.1:8000/group_chats/group_chat/invite/{code}"
     }
     return render(request, 'group_chat/chat_group_chat_one.html', context)
@@ -56,15 +56,40 @@ def add_to_group_by_invite_link(request, code):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+# @login_required
+# def create_group_chat(request):
+#     form = GroupChatForm(request.POST)
+#     if form.is_valid():
+#         group = form.save()
+#         group.members.add(request.user)
+#         return redirect(request.META.get('HTTP_REFERER', '/'))
+    
+
 @login_required
 def create_group_chat(request):
+    form = GroupChatForm()
     if request.method == 'POST':
         form = GroupChatForm(request.POST)
         if form.is_valid():
-            group_chat = form.save()
-            # Дополнительные действия, если необходимо
-            # return redirect('success_page')  # Перенаправляем пользователя на страницу успеха
-            return redirect(request.META.get('HTTP_REFERER', '/'))
-    else:
-        form = GroupChatForm()
-    return render(request, 'group_chat/chat_group_chat_one.html', {'form': form})
+            group = form.save()
+            group.members.add(request.user)
+            return redirect('group_chat')
+    context = {
+        "form": form,
+    }
+    return render(request, 'group_chat/chat_group_new_group_chat.html', context)
+
+
+@login_required
+def update_group_chat(request, chat_id):
+    chat = get_object_or_404(GroupChat, id = chat_id)
+    form = GroupChatForm(instance=chat)
+    if request.method == 'POST':
+        form = GroupChatForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('group_chat')
+    context = {
+        "form": form,
+    }
+    return render(request, 'group_chat/chat_group_new_group_chat.html', context)

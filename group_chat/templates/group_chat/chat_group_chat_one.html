@@ -22,7 +22,7 @@
 
         
 
-        <section class="chat" style="width: 600px; margin-right: 100px;">
+        <section class="chat" style="width: 750px;">
           <div class="header-chat">
               <div class="photo">
                 <img src="{{ chat.avatar.url }}" style="width: 50px;">
@@ -34,7 +34,15 @@
                 <img src="{{ member.avatar.url }}" style="width: 50px; padding-left: 30px;">
               </div>
               {% endfor %}
-              <button onclick="copyLink('{{ link }}')">Copy invite link</button>
+              <!-- <button onclick="copyLink('{{ link }}')">Copy invite link</button> -->
+              <div class="menu_nav">
+                <ul>
+                  <li style="padding-left: 100px;">
+                    <a style="padding-left: 10px; padding-right: 10px; " onclick="copyLink('{{ link }}')">Copy invite link</a>
+                    <a style="padding-left: 10px; padding-right: 10px;" href="{% url 'update_group_chat' chat_id=chat.id %}">Update group chat</a>
+                  </li>
+                </ul>
+              </div>
           </div>
           <div class="messages-chat" style="padding: 20px">
 
