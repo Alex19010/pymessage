@@ -1,0 +1,24 @@
+{% extends 'friends/main_friends.html' %}
+{% load static %}
+
+
+{% block title %}
+    Friends
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="content_bg">
+            <div class="mainbar">
+                <div class="article">
+                    <h2><span>All friends</span> {{ total_friends }}</h2>
+                    {% for friend in friends %}
+                        <img class="photo" src="{{ friend.friend.avatar.url }}">
+                        <p class="name">{{ friend.friend.first_name }} {{ friend.friend.last_name }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
