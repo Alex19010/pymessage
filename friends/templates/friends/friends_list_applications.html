@@ -1,0 +1,30 @@
+{% extends 'friends/main_applications.html' %}
+{% load static %}
+
+
+{% block title %}
+    Applications
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="content_bg">
+            <div class="mainbar">
+                <div class="article">
+                    <h2><span>All appliactions</span> {{ total_applications }}</h2>
+                    {% for app in applications %}
+                    <div class="discussion">
+                        <img class="photo" src="{{ app.friend.avatar.url }}">
+                        <div class="desc-contact">    
+                            <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
+                            <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
+                            <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
