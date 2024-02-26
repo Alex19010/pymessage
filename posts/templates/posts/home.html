@@ -1,0 +1,36 @@
+{% extends 'main_home.html' %}
+{% load static %}
+
+
+{% block title %}
+    Home
+{% endblock %}
+  
+
+{% block travel %}
+  <li class="active"><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'support' %}">Support</a></li>
+  <li><a href="{% url 'about' %}">About Us</a></li>
+  <li><a href="{% url 'blog' %}">Blog</a></li>
+  <li><a href="{% url 'contact' %}">Contact Us</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="content">
+    <div class="content_bg">
+      <div class="mainbar">
+        <div class="article">
+            <div class="clr"></div>
+            {% for post in posts %}
+                <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="#">{{ post.owner.first_name }}</a></p>
+                <img src="{{ post.image.url }}" width="613" height="193" alt="" />
+                <h2><span>{{ post.name }}</span></h2>
+                <p>{{ post.content }}</p>
+                <p class="spec"><a href="#" class="com fr">Comments {{ post.comments.count }}</a> <a href="#" class="rm fl">Likes {{ post.users.count }}</a></p>
+                <div class="clr"></div>
+            {% endfor %}
+        </div>
+        <div class="pagenavi"><span class="pages">Page 1 of 2</span><span class="current">1</span><a href="#">2</a><a href="#" >&raquo;</a></div>
+      </div>
+{% endblock %}
