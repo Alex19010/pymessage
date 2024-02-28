@@ -14,8 +14,13 @@
                 <div class="article">
                     <h2><span>All friends</span> {{ total_friends }}</h2>
                     {% for friend in friends %}
+                    <div class="discussion">
                         <img class="photo" src="{{ friend.friend.avatar.url }}">
-                        <p class="name">{{ friend.friend.first_name }} {{ friend.friend.last_name }}</p>
+                        <div class="desc-contact">    
+                            <a class="name">{{ friend.friend.first_name }} {{ friend.friend.last_name }}</a>
+                            <a href="{% url 'remove_friend' friend_id=friend.id %}"><button>Decline</button></a>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'private_chat',
     'group_chat',
     'friends',
+    'posts',
 ]
 
 MIDDLEWARE = [

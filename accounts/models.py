@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from .utils import set_random_username
+from posts.models import Post
 
 
 class User(AbstractUser):
@@ -13,6 +14,7 @@ class User(AbstractUser):
     date_of_birth = models.DateField(verbose_name = "Date of birth", null = True, blank = True)
     status = models.CharField(verbose_name = "Status", max_length = 250, null = True, blank = True)
     address = models.CharField(verbose_name = "Address", max_length = 250, null = True, blank = True)
+    favorites = models.ManyToManyField(Post, related_name="users", verbose_name="Favorites", blank=True)
 
     class Meta:
         verbose_name = "User"
