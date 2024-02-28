@@ -16,9 +16,12 @@
                     {% for app in applications %}
                     <div class="discussion">
                         <img class="photo" src="{{ app.friend.avatar.url }}">
-                        <div class="desc-contact">    
+                        <div class="desc-contact">
                             <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
-                            <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
+                            {% if app.can_accept %}
+
+                                <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
+                            {% endif %}
                             <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.db.models import Case, When, BooleanField, Q
 
 from .models import Friend, Application
 from accounts.models import User
@@ -21,7 +22,13 @@ def friends_view(request):
 @login_required()
 def applications_view(request):
     user = request.user
-    applications = Application.objects.filter(user=user)
+    applications = Application.objects.filter(Q(user=user) | Q(friend=user)).annotate(
+        can_accept=Case(
+            When(user=request.user, then=False),
+            default=True,
+            output_field=BooleanField()
+        )
+    )
     total_applications = len(applications)
     context = {
         'applications': applications,
