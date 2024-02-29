@@ -1,0 +1,35 @@
+{% extends 'main_home.html' %}
+{% load static %}
+
+
+{% block title %}
+    Home
+{% endblock %}
+  
+
+{% block travel %}
+  <li class="active"><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'support' %}">Support</a></li>
+  <li><a href="{% url 'about' %}">About Us</a></li>
+  <li><a href="{% url 'blog' %}">Blog</a></li>
+  <li><a href="{% url 'contact' %}">Contact Us</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="content">
+    <div class="content_bg">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Create post</span></h2>
+          <div class="clr"></div>
+          <form action="#" method="post" id="createpost">
+            <ol>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Create">
+            </ol>
+          </form>
+        </div>
+      </div>
+{% endblock %}

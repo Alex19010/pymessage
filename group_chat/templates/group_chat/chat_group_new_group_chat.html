@@ -19,17 +19,6 @@
         <div class="clr"></div>
         <form action="#" method="post" id="sendemail">
           <ol>
-            <!-- <li>
-              <label for="name">Name</label>
-              <input id="name" name="name" class="text" />
-            </li>
-            <li>
-              <label for="avatar">Avatar</label>
-              <input id="avatar" name="avatar" type="image">
-            </li> -->
-            <!-- <li>
-              <input type="image" name="imageField" id="imageField" src="{% static 'images/submit.gif' %}" class="send" />
-            </li> -->
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Create">

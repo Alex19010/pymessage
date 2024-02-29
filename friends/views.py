@@ -47,7 +47,7 @@ def add_friend(request, user_id):
             Application.objects.create(user = request.user, friend = friend)
         except IntegrityError:
             pass
-    return redirect(request.META.get('HTTP_REFERER', '/'))  
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @login_required()
