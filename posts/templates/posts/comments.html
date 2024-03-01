@@ -21,6 +21,16 @@
     <div class="content_bg">
       <div class="mainbar">
         <div class="article">
+            <h2><span>All comments</span> {{ post.comments.count }}</h2>
+            {% for comment in post.comments.all %}
+            <div class="discussion">
+                <img class="photo" src="{{ comment.owner.avatar.url }}">
+                <div class="desc-contact">    
+                    <a class="name">{{ comment.owner.first_name }} {{ comment.owner.last_name }}</a>
+                    {{ comment.content }}
+                </div>
+            </div>
+            {% endfor %}
           <h2><span>Create post</span></h2>
           <div class="clr"></div>
           <form action="#" method="post" id="createpost" enctype="multipart/form-data">

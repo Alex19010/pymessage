@@ -30,8 +30,8 @@
 
 
 {% block travel2 %}
-  <li class="active"><a href="{% url 'home' %}">Friends' posts</a></li>
-  <li><a href="{% url 'my_posts' %}">My posts</a></li>
+  <li><a href="{% url 'home' %}">Friends' posts</a></li>
+  <li class="active"><a href="{% url 'my_posts' %}">My posts</a></li>
 {% endblock %}
 
 
@@ -41,7 +41,7 @@
       <div class="mainbar">
         <div class="article">
             <div class="clr"></div>
-            <h2>Friends' posts</h2>
+            <h2>My posts</h2>
             {% for post in posts %}
                 <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="#">{{ post.owner.first_name }}</a></p>
                 <img src="{{ post.image.url }}" width="613" height="193" alt="" />
@@ -57,33 +57,33 @@
 
                 <div class="clr"></div>
             {% endfor %}
-
+            
         </div>
         <!-- <div class="pagenavi"><span class="pages">Page 1 of 2</span><span class="current">1</span><a href="#">2</a><a href="#" >&raquo;</a></div> -->
         <div class="pagination">
-          <span class="step-links">
-            {% if posts.has_previous %}
-            <div class="menu_nav">
-                <ul>
-                    <li><a href="?{{ request.GET.urlencode }}&page=1">&laquo; first</a></li>
-                    <li><a href="?{{ request.GET.urlencode }}&page={{ posts.previous_page_number }}">previous</a></li>
-                </ul>
-            </div>
-        {% endif %}
-
-        <span class="current">
-            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-        </span>
-
-        {% if posts.has_next %}
-            <div class="menu_nav">
-                <ul>
-                    <li><a href="?{{ request.GET.urlencode }}&page={{ posts.next_page_number }}">next</a></li>
-                    <li><a href="?{{ request.GET.urlencode }}&page={{ posts.paginator.num_pages }}">last &raquo;</a></li>
-                </ul>
-            </div>
-        {% endif %}
-          </span>
-      </div>
-      </div>
+            <span class="step-links">
+                {% if posts.has_previous %}
+                <div class="menu_nav">
+                    <ul>
+                        <li><a href="?{{ request.GET.urlencode }}&page=1">&laquo; first</a></li>
+                        <li><a href="?{{ request.GET.urlencode }}&page={{ posts.previous_page_number }}">previous</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            </span>
+    
+            {% if posts.has_next %}
+                <div class="menu_nav">
+                    <ul>
+                        <li><a href="?{{ request.GET.urlencode }}&page={{ posts.next_page_number }}">next</a></li>
+                        <li><a href="?{{ request.GET.urlencode }}&page={{ posts.paginator.num_pages }}">last &raquo;</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+            </span>
+        </div>
+    </div>
 {% endblock %}
