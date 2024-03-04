@@ -11,6 +11,9 @@ from accounts.models import User
 def friends_view(request):
     user = request.user
     friends = Friend.objects.filter(user=user)
+    search = request.GET.get("search")
+    if bool(search) != False:
+        friends = friends.filter(friend__first_name__icontains=search)
     total_friends = len(friends)
     context = {
         'friends': friends,
@@ -29,10 +32,24 @@ def applications_view(request):
             output_field=BooleanField()
         )
     )
+    search_users = None
+    search = request.GET.get("search")
+    if bool(search) != False:
+        search_users = User.objects.filter(
+            Q(first_name__icontains=search) | Q(last_name__icontains=search)
+            ).exclude(
+                id__in=applications.values_list('friend_id')
+            ).exclude(
+                id=user.id
+            ).exclude(
+                id__in=Friend.objects.filter(user=user).values_list('friend_id')
+            )
+
     total_applications = len(applications)
     context = {
         'applications': applications,
         'total_applications': total_applications,
+        'search_users': search_users
     }
     return render(request, 'friends/friends_list_applications.html', context)
 
@@ -45,6 +62,7 @@ def add_friend(request, user_id):
     if request.user.id != user_id:
         try:
             Application.objects.create(user = request.user, friend = friend)
+            print('test')
         except IntegrityError:
             pass
     return redirect(request.META.get('HTTP_REFERER', '/'))

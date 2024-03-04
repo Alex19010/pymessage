@@ -21,8 +21,20 @@
     <div class="content_bg">
       <div class="mainbar">
         <div class="article">
+
+          <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="#">{{ post.owner.first_name }}</a></p>
+          <img src="{{ post.image.url }}" width="613" height="193" alt="" />
+          <h2><span>{{ post.name }}</span></h2>
+          <p>{{ post.content }}</p>
+          <p class="spec"><a href="#" class="com fr">Comments {{ post.comments.count }}</a>
+
+            {% if post in request.user.favorites.all %}
+              <a href="{% url 'like_post' post_id=post.id %}" class="rm fl" style="background-color: burlywood;">Likes {{ post.users.count }}</a></p>
+            {% else %}
+              <a href="{% url 'like_post' post_id=post.id %}" class="rm fl">Likes {{ post.users.count }}</a></p>
+            {% endif %}
             <h2><span>All comments</span> {{ post.comments.count }}</h2>
-            {% for comment in post.comments.all %}
+            {% for comment in comments %}
             <div class="discussion">
                 <img class="photo" src="{{ comment.owner.avatar.url }}">
                 <div class="desc-contact">    
@@ -33,7 +45,7 @@
             {% endfor %}
           <h2><span>Create post</span></h2>
           <div class="clr"></div>
-          <form action="#" method="post" id="createpost" enctype="multipart/form-data">
+          <form action="{% url 'create_comment' post_id=post.id %}" method="post" id="createpost" enctype="multipart/form-data">
             <ol>
               {% csrf_token %}
               {{ form.as_p }}

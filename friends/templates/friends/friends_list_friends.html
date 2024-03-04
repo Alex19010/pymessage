@@ -7,6 +7,19 @@
 {% endblock %}
 
 
+{% block search %}
+<div class="search">
+  <form method="get" id="search" action="#">
+    <span>
+    <input type="text" placeholder="Search..." name="search" id="s" />
+    <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  />
+    </span>
+  </form>
+  <div class="clr"></div>
+</div>
+{% endblock %}
+
+
 {% block content %}
     <div class="content">
         <div class="content_bg">

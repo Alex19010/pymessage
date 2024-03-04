@@ -13,6 +13,9 @@ def private_chat(request):
 @login_required()
 def chat_view(request):
     private_chats = PrivateChat.objects.filter(members=request.user)
+    search = request.GET.get("search")
+    if bool(search) != False:
+        private_chats = private_chats.filter(members__first_name__icontains=search)
     context = {
         "chats": private_chats
     }

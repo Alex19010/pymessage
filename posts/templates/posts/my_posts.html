@@ -47,7 +47,7 @@
                 <img src="{{ post.image.url }}" width="613" height="193" alt="" />
                 <h2><span>{{ post.name }}</span></h2>
                 <p>{{ post.content }}</p>
-                <p class="spec"><a href="#" class="com fr">Comments {{ post.comments.count }}</a>
+                <p class="spec"><a href="{% url 'comments' post_id=post.id %}" class="com fr">Comments {{ post.comments.count }}</a>
 
                   {% if post in request.user.favorites.all %}
                     <a href="{% url 'like_post' post_id=post.id %}" class="rm fl" style="background-color: burlywood;">Likes {{ post.users.count }}</a></p>

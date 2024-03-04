@@ -11,12 +11,12 @@ from .forms import PostForm, CommentForm
 def friends_posts(request):
     user = request.user
     friends = user.user.values_list('friend__id')
-    posts = Post.objects.filter(owner__id__in = friends)   
+    posts = Post.objects.filter(owner__id__in = friends).order_by('-created')
     search = request.GET.get("search")    
-    if search is not None:
+    if bool(search) != False:
         posts = posts.filter(name__icontains=search)
  
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 10)
     posts = paginator.get_page(request.GET.get("page"))
 
     context = {
@@ -28,12 +28,12 @@ def friends_posts(request):
 @login_required()
 def my_posts(request):
     user = request.user
-    posts = Post.objects.filter(owner = user)
-    search = request.GET.get("search")    
-    if search is not None:
+    posts = Post.objects.filter(owner = user).order_by('-created')
+    search = request.GET.get("search")
+    if bool(search) != False:
         posts = posts.filter(name__icontains=search)
  
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 10)
     posts = paginator.get_page(request.GET.get("page"))
     context = {
         "posts": posts,
@@ -71,10 +71,12 @@ def create_post(request):
 @login_required()
 def comments_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    comments = post.comments.all().order_by('created')
     form = CommentForm()
     context = {
         'post': post,
-        'form': form
+        'form': form,
+        'comments': comments
     }
     return render(request, 'posts/comments.html', context)
 
