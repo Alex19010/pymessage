@@ -7,9 +7,13 @@ from .models import Friend, Application
 class AdminFriend(admin.ModelAdmin):
     list_display = ("id", 'user', 'friend')
     list_display_links = list_display
+    list_filter = ('user', 'friend')
+    search_fields = ('user', 'friend')
 
 
 @admin.register(Application)
 class AdminApplication(admin.ModelAdmin):
     list_display = ('id', 'user', 'friend')
     list_display_links = list_display
+    list_filter = ('user', 'friend')
+    search_fields = ('user', 'friend')

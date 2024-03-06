@@ -12,3 +12,5 @@ class MessageInline(admin.StackedInline):
 class AdminChat(admin.ModelAdmin):
     list_display = ("id",)
     inlines = (MessageInline,)
+    list_display_links = list_display
+

@@ -15,6 +15,9 @@ def group_chat(request):
 @login_required()
 def chat_view(request):
     group_chats = GroupChat.objects.filter(members=request.user)
+    search = request.GET.get("search")
+    if bool(search) != False:
+        group_chats = group_chats.filter(name__icontains=search)
     context = {
         "chats": group_chats
     }
