@@ -42,16 +42,43 @@
 
 
                     <h2><span>All appliactions</span> {{ total_applications }}</h2>
-                    {% for app in applications %}
-                    <div class="discussion">
-                        <img class="photo" src="{{ app.friend.avatar.url }}">
-                        <div class="desc-contact">
-                            <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
-                            {% if app.can_accept %}
-
+                    <h3>Users applications</h3>
+                    {% for app in users_applications %}
+                    <div class="applications-list">
+                        <div class="data">
+                            <div class="left">
+                                <img class="photo" src="{{ app.friend.avatar.url }}">
+                            </div>
+                            <div class="right">
+                                <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
+                                <span style="width: 100px;" class="timer">{{ app.created }}</span><br><br>
+                            
+                                {% if app.can_accept %}
+                                
                                 <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
-                            {% endif %}
-                            <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
+                                {% endif %}
+                                <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <h3>Your applications</h3>
+                    {% for app in my_applications %}
+                    <div class="applications-list">
+                        <div class="data">
+                            <div class="left">
+                                <img class="photo" src="{{ app.friend.avatar.url }}">
+                            </div>
+                            <div class="right">
+                                <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
+                                <span style="width: 100px;" class="timer">{{ app.created }}</span><br><br>
+                            
+                                {% if app.can_accept %}
+                                
+                                <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
+                                {% endif %}
+                                <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
@@ -60,4 +87,35 @@
             </div>
         </div>
     </div>
+
+
+<style>
+    .applications-list{
+        display: table;
+        width: 100%;
+    }
+
+    .timer{
+        margin-left: 25px;
+    }
+    
+    .data {
+        display: table-row;
+    }
+    
+    .left {
+        display: table-cell;
+        vertical-align: bottom;
+    }
+    
+    .right {
+        display: table-cell;
+        width: 100%;
+        padding-left: 20px;
+    }
+    
+    .photo {
+        width: 50px;
+    }
+</style>    
 {% endblock %}

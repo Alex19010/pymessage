@@ -1,13 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.core.paginator import Paginator
+
 
 from .models import User
 from .form import UserRegistrationForm
+from posts.models import Post
 
 
 def home(request):
-    return render(request, 'home.html')
+    user = request.user
+    friends = user.user.values_list('friend__id')
+    posts = Post.objects.filter(owner__id__in = friends).order_by('-created')
+    search = request.GET.get("search")    
+    if bool(search) != False:
+        posts = posts.filter(name__icontains=search)
+ 
+    paginator = Paginator(posts, 10)
+    posts = paginator.get_page(request.GET.get("page"))
+
+    context = {
+        "posts": posts,
+    }
+    return render(request, "posts/home.html", context)
 
 def support(request):
     return render(request, 'support.html')

@@ -27,16 +27,47 @@
                 <div class="article">
                     <h2><span>All friends</span> {{ total_friends }}</h2>
                     {% for friend in friends %}
-                    <div class="discussion">
-                        <img class="photo" src="{{ friend.friend.avatar.url }}">
-                        <div class="desc-contact">    
-                            <a class="name">{{ friend.friend.first_name }} {{ friend.friend.last_name }}</a>
+                    <div class="firends-list">
+                        <div class="data">
+                        <div class="left">
+                            <img class="photo" src="{{ friend.friend.avatar.url }}">
+                        </div>
+                        <div class="right">
+                            <a href="{% url 'user_posts' user_id=friend.friend.id %}" class="name">{{ friend.friend.first_name }} {{ friend.friend.last_name }}</a><br>
                             <a href="{% url 'remove_friend' friend_id=friend.id %}"><button>Decline</button></a>
                         </div>
+                    </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+
+
+<style>
+.friends-list{
+    display: table;
+    width: 100%;
+}
+
+.data {
+    display: table-row;
+}
+
+.left {
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.right {
+    display: table-cell;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.photo {
+    width: 50px;
+}
+</style>
 {% endblock %}

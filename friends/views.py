@@ -32,6 +32,20 @@ def applications_view(request):
             output_field=BooleanField()
         )
     )
+    users_applications = Application.objects.filter(Q(friend=user)).annotate(
+        can_accept=Case(
+            When(user=request.user, then=False),
+            default=True,
+            output_field=BooleanField()
+        )
+    )
+    my_applications = Application.objects.filter(Q(user=user)).annotate(
+        can_accept=Case(
+            When(user=request.user, then=False),
+            default=True,
+            output_field=BooleanField()
+        )
+    )
     search_users = None
     search = request.GET.get("search")
     if bool(search) != False:
@@ -48,6 +62,8 @@ def applications_view(request):
     total_applications = len(applications)
     context = {
         'applications': applications,
+        'users_applications': users_applications,
+        'my_applications': my_applications,
         'total_applications': total_applications,
         'search_users': search_users
     }

@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from .models import Post, Comment
 from friends.models import Friend
 from .forms import PostForm, CommentForm
+from accounts.models import User
 
 
 @login_required()
@@ -19,6 +20,22 @@ def friends_posts(request):
     paginator = Paginator(posts, 10)
     posts = paginator.get_page(request.GET.get("page"))
 
+    context = {
+        "posts": posts,
+    }
+    return render(request, "posts/home.html", context)
+
+
+@login_required()
+def user_posts(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    posts = Post.objects.filter(owner = user).order_by('-created')
+    search = request.GET.get("search")
+    if bool(search) != False:
+        posts = posts.filter(name__icontains=search)
+ 
+    paginator = Paginator(posts, 10)
+    posts = paginator.get_page(request.GET.get("page"))
     context = {
         "posts": posts,
     }

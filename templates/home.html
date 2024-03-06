@@ -3,9 +3,22 @@
 
 
 {% block title %}
-  SocialNet
+    Home
 {% endblock %}
   
+
+{% block search %}
+<div class="search">
+  <form method="get" id="search" action="#">
+    <span>
+    <input type="text" placeholder="Search..." name="search" id="s" />
+    <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  />
+    </span>
+  </form>
+  <div class="clr"></div>
+</div>
+{% endblock %}
+
 
 {% block travel %}
   <li class="active"><a href="{% url 'home' %}">Home</a></li>
@@ -16,29 +29,64 @@
 {% endblock %}
 
 
+{% block travel2 %}
+  <li class="active"><a href="{% url 'home' %}">Friends' posts</a></li>
+  <li><a href="{% url 'my_posts' %}">My posts</a></li>
+{% endblock %}
+
+
 {% block content %}
-  <div class="content">
+<div class="content">
     <div class="content_bg">
       <div class="mainbar">
         <div class="article">
-          <h2><span>Template License</span></h2>
-          <div class="clr"></div>
-          <p class="post-data"><span class="date">March 16, 2018</span> &nbsp;|&nbsp; Posted by <a href="#">Owner</a> &nbsp;|&nbsp; Filed under <a href="#">templates</a>, <a href="#">internet</a></p>
-          <img src="{% static 'images/images_1.jpg' %}" width="613" height="193" alt="" />
-          <p>This is a free CSS website template by RocketWebsiteTemplates.com. This work is distributed under the Creative Commons Attribution 3.0 License, which means that you are free to use it for any personal or commercial purpose provided you credit me in the form of a link back to RocketWebsiteTemplates.com.</p>
-          <p class="spec"><a href="#" class="com fr">Comments (3)</a> <a href="#" class="rm fl">Read more</a></p>
-          <div class="clr"></div>
+            <div class="clr"></div>
+            <h2>Friends' posts</h2>
+            {% for post in posts %}
+
+              <div style="margin-bottom: 90px;">
+                <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="#">{{ post.owner.first_name }}</a></p>
+                <img src="{{ post.image.url }}" width="613" height="193" alt="" />
+                <h2><span>{{ post.name }}</span></h2>
+                <p>{{ post.content }}</p>
+                <p class="spec"><a href="{% url 'comments' post_id=post.id %}" class="com fr">Comments {{ post.comments.count }}</a>
+
+                  {% if post in request.user.favorites.all %}
+                    <a href="{% url 'like_post' post_id=post.id %}" class="rm fl" style="background-color: burlywood;">Likes {{ post.users.count }}</a></p>
+                  {% else %}
+                    <a href="{% url 'like_post' post_id=post.id %}" class="rm fl">Likes {{ post.users.count }}</a></p>
+                  {% endif %}
+              </div>
+                  
+                <div class="clr"></div>
+            {% endfor %}
+
         </div>
-        <div class="article">
-          <h2><span>Lorem Ipsum</span> Dolor Sit</h2>
-          <div class="clr"></div>
-          <p class="post-data"><span class="date">March 15, 2010</span> &nbsp;|&nbsp; Posted by <a href="#">Owner</a> &nbsp;|&nbsp; Filed under <a href="#">templates</a>, <a href="#">internet</a></p>
-          <img src="{% static 'images/images_2.jpg' %}" width="613" height="193" alt="" />
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. <a href="#">Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu posuere nunc justo tempus leo.</a> Donec mattis, purus nec placerat bibendum, dui pede condimentum odio, ac blandit ante orci ut diam. Cras fringilla magna. Phasellus suscipit, leo a pharetra condimentum, lorem tellus eleifend magna, eget fringilla velit magna id neque. Curabitur vel urna. In tristique orci porttitor ipsum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. Morbi tincidunt, orci ac convallis aliquam.</p>
-          <p>Aenean commodo elit ac ante dignissim iaculis sit amet non velit. Donec magna sapien, molestie sit amet faucibus sit amet, fringilla in urna. Aliquam erat volutpat. Fusce a dui est. Sed in volutpat elit. Nam odio tortor, pulvinar non scelerisque in, eleifend nec nunc. Sed pretium, massa sed dictum dapibus, nibh purus posuere magna, ac porta felis lectus ut neque. Nullam sagittis ante vitae velit facilisis lacinia. Cras vehicula lacinia ornare. Duis et cursus risus. Curabitur consectetur justo sit amet odio viverra vel iaculis odio gravida. Ut imperdiet metus nec erat.</p>
-          <p class="spec"><a href="#" class="com fr">Comments (7)</a> <a href="#" class="rm fl">Read more</a></p>
-          <div class="clr"></div>
-        </div>
-        <div class="pagenavi"><span class="pages">Page 1 of 2</span><span class="current">1</span><a href="#">2</a><a href="#" >&raquo;</a></div>
+        <!-- <div class="pagenavi"><span class="pages">Page 1 of 2</span><span class="current">1</span><a href="#">2</a><a href="#" >&raquo;</a></div> -->
+        <div class="pagination">
+          <span class="step-links">
+            {% if posts.has_previous %}
+            <div class="menu_nav">
+                <ul>
+                    <li><a href="?{{ request.GET.urlencode }}&page=1">&laquo; first</a></li>
+                    <li><a href="?{{ request.GET.urlencode }}&page={{ posts.previous_page_number }}">previous</a></li>
+                </ul>
+            </div>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <div class="menu_nav">
+                <ul>
+                    <li><a href="?{{ request.GET.urlencode }}&page={{ posts.next_page_number }}">next</a></li>
+                    <li><a href="?{{ request.GET.urlencode }}&page={{ posts.paginator.num_pages }}">last &raquo;</a></li>
+                </ul>
+            </div>
+        {% endif %}
+          </span>
+      </div>
       </div>
 {% endblock %}
