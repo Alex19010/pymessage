@@ -87,8 +87,10 @@ def add_friend(request, user_id):
 @login_required()
 def remove_friend(request, friend_id):
     friend = get_object_or_404(Friend, id = friend_id)
+    reversed_friend = get_object_or_404(Friend, user = friend.friend.id, friend = friend.user.id)
     if request.user in [friend.user, friend.friend]:
         friend.delete()
+        reversed_friend.delete()
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -96,6 +98,7 @@ def remove_friend(request, friend_id):
 def accept_application(request, application_id):
     application = get_object_or_404(Application, id = application_id)
     Friend.objects.create(user = application.user, friend = application.friend)
+    Friend.objects.create(user = application.friend, friend = application.user)
     application.delete()
     return redirect(request.META.get('HTTP_REFERER', '/'))
 

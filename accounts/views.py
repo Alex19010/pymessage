@@ -25,17 +25,9 @@ def home(request):
     }
     return render(request, "posts/home.html", context)
 
-def support(request):
-    return render(request, 'support.html')
 
 def about(request):
     return render(request, 'about.html')
-
-def blog(request):
-    return render(request, 'blog.html')
-
-def contact(request):
-    return render(request, 'contact.html')
 
 
 def register_up(request): 
@@ -83,14 +75,3 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-
-# def register_in(request):
-#     return render(request, 'register_in.html')
-
-# def register_up(request):
-#     return render(request, 'register_up.html')
-
-
-
-# def test(request):
-#     return render(request, 'main_home.html')

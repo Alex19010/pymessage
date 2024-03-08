@@ -9,10 +9,7 @@
 
 {% block travel %}
   <li class="active"><a href="{% url 'home' %}">Home</a></li>
-  <li><a href="{% url 'support' %}">Support</a></li>
   <li><a href="{% url 'about' %}">About Us</a></li>
-  <li><a href="{% url 'blog' %}">Blog</a></li>
-  <li><a href="{% url 'contact' %}">Contact Us</a></li>
 {% endblock %}
 
 
@@ -35,13 +32,15 @@
             {% endif %}
             <h2><span>All comments</span> {{ post.comments.count }}</h2>
             {% for comment in comments %}
-            <div class="discussion">
+            <div class="data">
+              <div class="left">
                 <img class="photo" src="{{ comment.owner.avatar.url }}">
-                <div class="desc-contact">    
-                    <a class="name">{{ comment.owner.first_name }} {{ comment.owner.last_name }}</a>
-                    {{ comment.content }}
-                </div>
-            </div>
+              </div>
+              <div class="right">    
+                <a href="{% url 'user_posts' user_id=comment.owner.id %}" class="name">{{ comment.owner.first_name }} {{ comment.owner.last_name }}</a>
+                <br>{{ comment.content }}
+              </div>
+            </div><br>
             {% endfor %}
           <h2><span>Create post</span></h2>
           <div class="clr"></div>
@@ -54,4 +53,29 @@
           </form>
         </div>
       </div>
+
+
+<style>
+  .data {
+      display: table-row;
+      /* margin-bottom: 20px; */
+
+  }
+  
+  .left {
+      display: table-cell;
+      vertical-align: top;
+  }
+  
+  .right {
+      display: table-cell;
+      width: 100%;
+      padding-left: 20px;
+  }
+  
+  .photo {
+      width: 50px;
+  }
+  </style>
+
 {% endblock %}

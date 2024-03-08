@@ -32,26 +32,14 @@
       <div class="menu_nav">
           <div class="registr">
             <ul>
-              <!-- <button type="button">Join up</button>
-              <button type="button">Join in</button> -->
-              <!-- <li><a href="{% url 'home' %}">Sign up</a></li>
-              <li><a href="{% url 'home' %}">Sign in</a></li> -->
+
               {% block register %}
               {% endblock %}
             </ul>
           </div>
       </div>
       <div class="clr"></div>
-      <!-- <div class="menu_nav">
-        <ul>
-          <li class="active"><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'support' %}">Support</a></li>
-          <li><a href="{% url 'about' %}">About Us</a></li>
-          <li><a href="{% url 'blog' %}">Blog</a></li>
-          <li><a href="{% url 'contact' %}">Contact Us</a></li>
-        </ul>
-        <div class="clr"></div>
-      </div> -->
+
       <div class="menu_nav">
         <ul>
           {% block travel %}

@@ -92,8 +92,8 @@ def comments_view(request, post_id):
     form = CommentForm()
     context = {
         'post': post,
+        'comments': comments,
         'form': form,
-        'comments': comments
     }
     return render(request, 'posts/comments.html', context)
 

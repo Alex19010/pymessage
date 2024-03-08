@@ -19,22 +19,13 @@
       <div class="logo">
         <h1><a href="{% url 'home' %}"><span>Py</span>Message<small></small></a></h1>
       </div>
-      <!-- <div class="search">
-        <form method="get" id="search" action="#">
-          <span>
-          <input type="text" value="Search..." name="s" id="s" />
-          <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  />
-          </span>
-        </form>
-        /searchform
-        <div class="clr"></div>
-      </div> -->
+
       {% block search %}
       {% endblock %}
       <div class="menu_nav">
         <div class="registr">
           <ul>
-            
+
             <li>
               {% if request.user.is_authenticated %}
               <li>
@@ -56,7 +47,16 @@
         </div>
       </div>
       <div class="clr"></div>
-      
+      <!-- <div class="menu_nav">
+        <ul>
+          <li class="active"><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'support' %}">Support</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        </ul>
+        <div class="clr"></div>
+      </div> -->
       <div class="menu_nav">
         <ul>
           {% block travel %}
