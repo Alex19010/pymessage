@@ -1,9 +1,11 @@
+{% load static %}
 <section class="discussions" style="width: 250px;">
   <form method="get" class="discussion search">
     <div class="searchbar">
-      <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <!-- <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button> -->
+      <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  style="height: 35px; width: auto; margin: 0px;">
       <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
-        <input type="text" placeholder="Search..." name="search"></input>
+        <input type="text" placeholder="Search..." name="search">
       </div>
     </form>
 

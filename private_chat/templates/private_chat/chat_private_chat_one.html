@@ -22,8 +22,8 @@
 
     
 
-        <section class="chat" style="width: 600px; margin-right: 100px;">
-          <div class="header-chat">
+        <section class="chat" style="width: 750px;">
+          <div class="header-chat" style="padding-left: 20px">
             {% for member in chat.members.all %}
               {% if member != request.user %}
               <div class="photo">
@@ -34,7 +34,7 @@
               {% endif %}
             {% endfor %}
           </div>
-          <div class="messages-chat" style="padding: 20px">
+          <div class="messages-chat" style="padding: 20px; overflow-x: hidden; overflow-y: auto; height: 478px;">
 
             {% for message in chat.messages.all %}
 

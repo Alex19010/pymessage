@@ -23,7 +23,7 @@
         
 
         <section class="chat" style="width: 750px;">
-          <div class="header-chat">
+          <div class="header-chat" style="padding-left: 20px">
               <div class="photo">
                 <img src="{{ chat.avatar.url }}" style="width: 50px;">
               </div>
@@ -44,7 +44,7 @@
                 </ul>
               </div>
           </div>
-          <div class="messages-chat" style="padding: 20px">
+          <div class="messages-chat" style="padding: 20px; overflow-x: hidden; overflow-y: auto; height: 478px;">
 
             {% for message in chat.messages.all %}
 

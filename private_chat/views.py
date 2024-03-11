@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
 from .models import PrivateChat, PrivateMessage
+from accounts.models import User
 
 
 @login_required()
@@ -31,6 +32,19 @@ def chat_one_view(request, chat_id):
         "chat": chat,
     }
     return render(request, 'private_chat/chat_private_chat_one.html', context)
+
+
+@login_required
+def create_priv_chat(request, user_id):
+    user = request.user
+    friend = get_object_or_404(User, id=user_id)
+    chat = PrivateChat.objects.filter(members=user).filter(members=friend).first()
+    if chat is not None:
+        return redirect('one_private_chat', chat_id= chat.id)
+    
+    chat = PrivateChat.objects.create()
+    chat.members.set([user, friend])
+    return redirect('one_private_chat', chat_id=chat.id)
 
 
 @login_required

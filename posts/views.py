@@ -50,7 +50,7 @@ def my_posts(request):
     if bool(search) != False:
         posts = posts.filter(name__icontains=search)
  
-    paginator = Paginator(posts, 10)
+    paginator = Paginator(posts, 1)
     posts = paginator.get_page(request.GET.get("page"))
     context = {
         "posts": posts,

@@ -35,6 +35,7 @@
                         <div class="right">
                             <a href="{% url 'user_posts' user_id=friend.friend.id %}" class="name">{{ friend.friend.first_name }} {{ friend.friend.last_name }}</a><br>
                             <a href="{% url 'remove_friend' friend_id=friend.id %}"><button>Decline</button></a>
+                            <a href="{% url 'one_private_chat_new' user_id=friend.friend.id  %}"><button>Message</button></a>
                         </div>
                     </div>
                     </div>
