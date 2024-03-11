@@ -41,7 +41,7 @@
             <li>
               {% if request.user.is_authenticated %}
               <li>
-                <a href="">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                <a href="{% url 'my_posts' %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
                 <!-- <p>Log out</p> -->
                 <!-- <a href="">Log out</a> -->
                 <a href="{% url 'logout' %}">Log out</a>
@@ -59,16 +59,7 @@
         </div>
       </div>
       <div class="clr"></div>
-      <!-- <div class="menu_nav">
-        <ul>
-          <li class="active"><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'support' %}">Support</a></li>
-          <li><a href="{% url 'about' %}">About Us</a></li>
-          <li><a href="{% url 'blog' %}">Blog</a></li>
-          <li><a href="{% url 'contact' %}">Contact Us</a></li>
-        </ul>
-        <div class="clr"></div>
-      </div> -->
+
       <div class="menu_nav">
         <ul>
           {% block travel %}

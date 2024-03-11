@@ -34,13 +34,10 @@ def chat_one_view(request, chat_id):
 
 
 @login_required
-def save_message_view(request, chat_id):
+def save_message_priv_view(request, chat_id):
     if request.method == 'POST':
         message_content = request.POST.get('message_content')
-        # Создайте новое сообщение и сохраните его
         chat = get_object_or_404(PrivateChat, id=chat_id)
         new_message = PrivateMessage.objects.create(chat=chat, sender=request.user, content=message_content)
         new_message.save()
         return redirect(request.META.get('HTTP_REFERER', '/'))
-    # else:
-    #     return redirect('error_page')  # Если метод запроса не POST, перенаправьте пользователя на страницу ошибки

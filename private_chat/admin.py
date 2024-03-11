@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import PrivateChat, PrivateMessage
 
 
@@ -13,4 +12,3 @@ class AdminChat(admin.ModelAdmin):
     list_display = ("id",)
     inlines = (MessageInline,)
     list_display_links = list_display
-

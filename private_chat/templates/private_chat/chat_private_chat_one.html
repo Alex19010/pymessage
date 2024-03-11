@@ -61,7 +61,7 @@
         </section>
         
         
-          <form id="content" action="{% url 'save_message' chat_id=chat.id %}" method="post">
+          <form id="content" action="{% url 'save_message_priv' chat_id=chat.id %}" method="post">
             {% csrf_token %}
                 <div class="footer-chat" style="margin-left: 300px; width: 600px;">
                 

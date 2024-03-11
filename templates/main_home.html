@@ -38,7 +38,7 @@
             <li>
               {% if request.user.is_authenticated %}
               <li>
-                <a href="">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                <a href="{% url 'my_posts' %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
                 <!-- <p>Log out</p> -->
                 <!-- <a href="">Log out</a> -->
                 <a href="{% url 'logout' %}">Log out</a>
