@@ -33,7 +33,7 @@ def chat_one_view(request, chat_id):
         "chats": group_chats,
         "chat": chat,
         "members": list(chat.members.all())[:5],
-        "link": f"http://127.0.0.1:8000/group_chats/group_chat/invite/{code}"
+        "link": f"http://127.0.0.1:8000/group_chats/invite/{code}"
     }
     return render(request, 'group_chat/chat_group_chat_one.html', context)
 

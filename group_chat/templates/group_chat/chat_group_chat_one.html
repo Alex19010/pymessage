@@ -21,7 +21,6 @@
                 <img src="{{ chat.avatar.url }}" style="width: 50px;">
               </div>
               <p class="name">{{chat.name}}</p>
-              <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
               {% for member in members %}
               <div class="photo">
                 <img src="{{ member.avatar.url }}" style="width: 50px; padding-left: 30px;">
@@ -36,7 +35,7 @@
                 </ul>
               </div>
           </div>
-          <div class="messages-chat" style="padding: 20px; overflow-x: hidden; overflow-y: auto; height: 478px;">
+          <div class="messages-chat" style="padding: 20px; overflow-x: hidden; overflow-y: auto; height: 450px;">
             {% for message in chat.messages.all %}
             {% if message.sender.id != request.user.id %}
             <div class="message text-only">

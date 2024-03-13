@@ -26,7 +26,10 @@
             <li>
               {% if request.user.is_authenticated %}
               <li>
-                <a href="{% url 'my_posts' %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                <a href="{% url 'my_posts' %}">
+                  {{ request.user.first_name }} {{ request.user.last_name }}
+                  <p style="text-align: center; margin: 0px; padding: 0px;">({{ request.user.username }})</p>
+                </a>
                 <a href="{% url 'logout' %}">Log out</a>
               </li>
               {% else %}

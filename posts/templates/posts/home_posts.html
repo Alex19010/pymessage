@@ -41,7 +41,7 @@
             <h2>Friends' posts</h2>
             {% for post in posts %}
               <div style="margin-bottom: 90px;">
-                <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="">{{ post.owner.first_name }}</a></p>
+                <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="{% url 'user_posts' user_id=post.owner.id %}">{{ post.owner.first_name }}</a></p>
                 <img src="{{ post.image.url }}" width="613" height="193" alt="" />
                 <h2><span>{{ post.name }}</span></h2>
                 <p>{{ post.content }}</p>
