@@ -23,7 +23,7 @@ def friends_posts(request):
     context = {
         "posts": posts,
     }
-    return render(request, "posts/home.html", context)
+    return render(request, "posts/home_posts.html", context)
 
 
 @login_required()
@@ -39,7 +39,7 @@ def user_posts(request, user_id):
     context = {
         "posts": posts,
     }
-    return render(request, "posts/home.html", context)
+    return render(request, "posts/home_posts.html", context)
 
 
 @login_required()
@@ -50,7 +50,7 @@ def my_posts(request):
     if bool(search) != False:
         posts = posts.filter(name__icontains=search)
  
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 10)
     posts = paginator.get_page(request.GET.get("page"))
     context = {
         "posts": posts,

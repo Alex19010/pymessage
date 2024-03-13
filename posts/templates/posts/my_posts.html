@@ -59,9 +59,7 @@
 
                 <div class="clr"></div>
             {% endfor %}
-            
         </div>
-        <!-- <div class="pagenavi"><span class="pages">Page 1 of 2</span><span class="current">1</span><a href="#">2</a><a href="#" >&raquo;</a></div> -->
         <div class="pagination">
             <span class="step-links">
               {% if posts.has_next %}
@@ -72,7 +70,6 @@
                 </ul>
               </div>
               {% endif %}
-
               {% if posts.has_previous %}
               <div class="menu_nav">
                   <ul>
@@ -81,7 +78,6 @@
                   </ul>
               </div>
               {% endif %}
-  
               <span class="current">
                       Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
                   </span>

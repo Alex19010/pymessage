@@ -11,17 +11,10 @@
 {% endblock %}
 
 {% block content %}
-
 <body>
     <div class="container" style="width: 1000px;">
       <div class="row">
-      
-      
         {% include 'private_chat/chats_list.html' %}
-          
-
-    
-
         <section class="chat" style="width: 750px;">
           <div class="header-chat" style="padding-left: 20px">
             {% for member in chat.members.all %}
@@ -35,9 +28,7 @@
             {% endfor %}
           </div>
           <div class="messages-chat" style="padding: 20px; overflow-x: hidden; overflow-y: auto; height: 478px;">
-
             {% for message in chat.messages.all %}
-
             {% if message.sender.id != request.user.id %}
             <div class="message text-only">
               <p class="text"> {{ message.content }} </p>
@@ -49,9 +40,7 @@
               </div>
             </div>
             {% endif %}
-            
             {% endfor %}
-
           </div>
           <div class="footer-chat">
             <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
@@ -59,24 +48,16 @@
             <i class="icon send fa fa-paper-plane-o clickable" aria-hidden="true"></i>
           </div>
         </section>
-        
-        
           <form id="content" action="{% url 'save_message_priv' chat_id=chat.id %}" method="post">
             {% csrf_token %}
                 <div class="footer-chat" style="margin-left: 300px; width: 600px;">
-                
                   <input name="message_content" id="content" type="text" class="write-message" placeholder="Type your message here" style="width: 550px;" required></input>
                   <button class="icon send fa fa-paper-plane-o clickable" type="submit"></button>
-
                 </div>
             </form>
-    
-
           </div>
         </section>
       </div>
     </div>
   </body>
-
-
 {% endblock %}

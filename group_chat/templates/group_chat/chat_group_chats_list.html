@@ -8,7 +8,6 @@
         <input type="text" placeholder="Search..." name="search">
       </div>
     </form>
-
     <div class="discussion search"  style="height: 30px; padding-top: 17px; padding-bottom: 10px;">
       <div class="menu_nav">
         <ul>
@@ -18,11 +17,8 @@
         </ul>
       </div>
     </div>
-
-  
     {% for chat in chats %}
     <a href="{% url 'one_group_chat' chat_id=chat.id  %}">
-
       <div class="discussion">
         <div class="photo" style="background-image: url({{ chat.avatar.url }});"></div>  
         <div class="desc-contact">
@@ -30,8 +26,6 @@
         </div>
         <div class="timer">{{ chat.messages.last.timestamp }}</div>
       </div>
-      
     </a>
     {% endfor %}
-    
   </section>

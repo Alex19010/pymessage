@@ -40,7 +40,6 @@
             <div class="clr"></div>
             <h2>Friends' posts</h2>
             {% for post in posts %}
-
               <div style="margin-bottom: 90px;">
                 <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="">{{ post.owner.first_name }}</a></p>
                 <img src="{{ post.image.url }}" width="613" height="193" alt="" />
@@ -54,10 +53,8 @@
                     <a href="{% url 'like_post' post_id=post.id %}" class="rm fl">Likes {{ post.users.count }}</a></p>
                   {% endif %}
               </div>
-                  
                 <div class="clr"></div>
             {% endfor %}
-
         </div>
         <div class="pagination">
           <span class="step-links">
@@ -69,11 +66,9 @@
                 </ul>
             </div>
         {% endif %}
-
         <span class="current">
             Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
         </span>
-
         {% if posts.has_next %}
             <div class="menu_nav">
                 <ul>

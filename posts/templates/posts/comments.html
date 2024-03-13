@@ -18,13 +18,11 @@
     <div class="content_bg">
       <div class="mainbar">
         <div class="article">
-
           <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="#">{{ post.owner.first_name }}</a></p>
           <img src="{{ post.image.url }}" width="613" height="193" alt="" />
           <h2><span>{{ post.name }}</span></h2>
           <p>{{ post.content }}</p>
           <p class="spec"><a href="#" class="com fr">Comments {{ post.comments.count }}</a>
-
             {% if post in request.user.favorites.all %}
               <a href="{% url 'like_post' post_id=post.id %}" class="rm fl" style="background-color: burlywood;">Likes {{ post.users.count }}</a></p>
             {% else %}
@@ -58,8 +56,6 @@
 <style>
   .data {
       display: table-row;
-      /* margin-bottom: 20px; */
-
   }
   
   .left {
@@ -77,5 +73,4 @@
       width: 50px;
   }
   </style>
-
 {% endblock %}

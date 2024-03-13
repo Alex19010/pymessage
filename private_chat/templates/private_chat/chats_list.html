@@ -2,10 +2,7 @@
 <section class="discussions" style="width: 250px;">
     <form method="get" class="discussion search">
       <div class="searchbar">
-        <!-- <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button> -->
-        <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
         <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  style="height: 35px; width: auto; margin: 0px;">
-
           <input type="text" placeholder="Search..." name="search"></input>
         </div>
       </form>
@@ -26,8 +23,6 @@
         </div>
         {% endif %}
       {% endfor %}
-      
     </a>
     {% endfor %}
-    
   </section>
