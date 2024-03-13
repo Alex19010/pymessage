@@ -1,0 +1,121 @@
+{% extends 'friends/main_applications.html' %}
+{% load static %}
+
+
+{% block title %}
+    Applications
+{% endblock %}
+
+
+{% block search %}
+<div class="search">
+  <form method="get" id="search" action="#">
+    <span>
+    <input type="text" placeholder="Search..." name="search" id="s" />
+    <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  />
+    </span>
+  </form>
+  <div class="clr"></div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="content_bg">
+            <div class="mainbar">
+                <div class="article">
+
+                    {% if search_users is not None %}
+                    <h2><span>All users</span> {{ search_users.count }}</h2>
+                    {% for user in search_users %}
+                    <div class="discussion">
+                        <img class="photo" src="{{ user.avatar.url }}">
+                        <div class="desc-contact">
+                            <a class="name">{{ user.first_name }} {{ user.last_name }}</a>
+
+                            <a href="{% url 'add_friend' user_id=user.id %}"><button>Add</button></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+                    <h2><span>All appliactions</span> {{ total_applications }}</h2>
+                    <h3>Users applications</h3>
+                    {% for app in users_applications %}
+                    <div class="applications-list">
+                        <div class="data">
+                            <div class="left">
+                                <img class="photo" src="{{ app.friend.avatar.url }}">
+                            </div>
+                            <div class="right">
+                                <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
+                                <span style="width: 100px;" class="timer">{{ app.created }}</span><br><br>
+                            
+                                {% if app.can_accept %}
+                                
+                                <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
+                                {% endif %}
+                                <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <h3>Your applications</h3>
+                    {% for app in my_applications %}
+                    <div class="applications-list">
+                        <div class="data">
+                            <div class="left">
+                                <img class="photo" src="{{ app.friend.avatar.url }}">
+                            </div>
+                            <div class="right">
+                                <a class="name">{{ app.friend.first_name }} {{ app.friend.last_name }}</a>
+                                <span style="width: 100px;" class="timer">{{ app.created }}</span><br><br>
+                            
+                                {% if app.can_accept %}
+                                
+                                <a href="{% url 'accept_application' application_id=app.id %}"><button>Accept</button></a>
+                                {% endif %}
+                                <a href="{% url 'delete_application' application_id=app.id %}"><button>Decline</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<style>
+    .applications-list{
+        display: table;
+        width: 100%;
+    }
+
+    .timer{
+        margin-left: 25px;
+    }
+    
+    .data {
+        display: table-row;
+    }
+    
+    .left {
+        display: table-cell;
+        vertical-align: bottom;
+    }
+    
+    .right {
+        display: table-cell;
+        width: 100%;
+        padding-left: 20px;
+    }
+    
+    .photo {
+        width: 50px;
+    }
+</style>    
+{% endblock %}

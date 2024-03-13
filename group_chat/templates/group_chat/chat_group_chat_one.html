@@ -1,0 +1,80 @@
+{% extends 'group_chat/main_group_chat.html' %}
+{% load static %}
+
+{% block title %}
+  SocialNet
+{% endblock %}
+
+{% block travel %}
+  <li><a href="{% url 'private_chat' %}">Private chats</a></li>
+  <li class="active"><a href="{% url 'group_chat' %}">Group chats</a></li>
+{% endblock %}
+
+{% block content %}
+<body>
+    <div class="container" style="width: 1000px;">
+      <div class="row">
+        {% include 'group_chat/chat_group_chats_list.html' %}
+        <section class="chat" style="width: 750px;">
+          <div class="header-chat" style="padding-left: 20px">
+              <div class="photo">
+                <img src="{{ chat.avatar.url }}" style="width: 50px;">
+              </div>
+              <p class="name">{{chat.name}}</p>
+              {% for member in members %}
+              <div class="photo">
+                <img src="{{ member.avatar.url }}" style="width: 50px; padding-left: 30px;">
+              </div>
+              {% endfor %}
+              <div class="menu_nav">
+                <ul>
+                  <li style="padding-left: 100px;">
+                    <a style="padding-left: 10px; padding-right: 10px; " onclick="copyLink('{{ link }}')">Copy invite link</a>
+                    <a style="padding-left: 10px; padding-right: 10px;" href="{% url 'update_group_chat' chat_id=chat.id %}">Update group chat</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <div class="messages-chat" style="padding: 20px; overflow-x: hidden; overflow-y: auto; height: 450px;">
+            {% for message in chat.messages.all %}
+            {% if message.sender.id != request.user.id %}
+            <div class="message text-only">
+                <img src="{{ message.sender.avatar.url }}" class="photo">
+                <p class="text"> {{ message.content }} </p>
+            </div>
+            {% else %}
+            <div class="message text-only">
+              <div class="response">
+                <p class="text">{{ message.content }}</p>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <div class="footer-chat">
+            <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
+            <input type="text" class="write-message" placeholder="Type your message here"></input>
+            <i class="icon send fa fa-paper-plane-o clickable" aria-hidden="true"></i>
+          </div>
+        </section>
+          <form id="content" action="{% url 'save_message' chat_id=chat.id %}" method="post">
+            {% csrf_token %}
+                <div class="footer-chat" style="margin-left: 300px; width: 600px;">
+                
+                  <input name="message_content" id="content" type="text" class="write-message" placeholder="Type your message here" style="width: 550px;" required></input>
+                  <button class="icon send fa fa-paper-plane-o clickable" type="submit"></button>
+                </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+<script>
+  function copyLink(link) {
+    console.log(link);
+    navigator.clipboard.writeText(link);
+    alert("Link copied! " + link)
+  }
+</script>
+{% endblock %}

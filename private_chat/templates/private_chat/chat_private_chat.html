@@ -1,0 +1,23 @@
+{% extends 'private_chat/main_chat.html' %}
+{% load static %}
+
+{% block title %}
+  SocialNet
+{% endblock %}
+
+{% block travel %}
+  <li class="active"><a href="{% url 'private_chat' %}">Private chats</a></li>
+  <li><a href="{% url 'group_chat' %}">Group chats</a></li>
+{% endblock %}
+
+
+{% block content %}
+<body>
+    <div class="container" style="width: 1000px;">
+      <div class="row">
+        {% include 'private_chat/chats_list.html' %}
+      </div>
+      </div>
+    </div>
+</body>
+{% endblock %}

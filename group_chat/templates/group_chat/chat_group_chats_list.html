@@ -1,0 +1,31 @@
+{% load static %}
+<section class="discussions" style="width: 250px;">
+  <form method="get" class="discussion search">
+    <div class="searchbar">
+      <!-- <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button> -->
+      <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  style="height: 35px; width: auto; margin: 0px;">
+      <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+        <input type="text" placeholder="Search..." name="search">
+      </div>
+    </form>
+    <div class="discussion search"  style="height: 30px; padding-top: 17px; padding-bottom: 10px;">
+      <div class="menu_nav">
+        <ul>
+          <li>
+            <a href="{% url 'create_group_chat' %}">Create new group chat</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% for chat in chats %}
+    <a href="{% url 'one_group_chat' chat_id=chat.id  %}">
+      <div class="discussion">
+        <div class="photo" style="background-image: url({{ chat.avatar.url }});"></div>  
+        <div class="desc-contact">
+          <p class="name">{{ chat.short_name }}</p>
+        </div>
+        <div class="timer">{{ chat.messages.last.timestamp }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </section>

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}{% endblock %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/chat_style.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'font-awesome-4.7.0\css\font-awesome.min.css' %}">
+<script type="text/javascript" src="{% static 'js/jquery-1.3.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/arial.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cuf_run.js' %}"></script>
+</head>
+<body>
+<div class="main">
+  <div class="main_resize">
+    <div class="header">
+      <div class="logo">
+        <h1><a href="{% url 'home' %}"><span>Py</span>Message<small></small></a></h1>
+      </div>
+      {% block search %}
+      {% endblock %}
+      <div class="menu_nav">
+        <div class="registr">
+          <ul>
+            <li>
+              {% if request.user.is_authenticated %}
+              <li>
+                <a href="{% url 'my_posts' %}">{{ request.user.first_name }} {{ request.user.last_name }}
+                  <p style="text-align: center; margin: 0px; padding: 0px;">({{ request.user.username }})</p>
+                </a>
+                <a href="{% url 'logout' %}">Log out</a>
+              </li>
+              {% else %}
+                <li>
+                  <a href="{% url 'register_in' %}">Sign in</a>
+                </li>
+                <li>
+                  <a href="{% url 'register_up' %}">Sing up</a>
+                </li>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+      <div class="menu_nav">
+        <ul>
+          {% block travel %}
+          {% endblock %}
+        </ul>
+        <div class="clr"></div>
+      </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <div class="sidebar">
+          <div class="gadget">
+            <h2 class="star"><span>Sidebar</span> Menu</h2>
+            <div class="clr"></div>
+            <ul class="sb_menu">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'private_chat' %}">Message</a></li>
+              <li><a href="{% url 'friends' %}">Friends</a></li>
+              <li class="active"><a href="{% url 'applications' %}">Applications</a></li>
+            </ul>
+          </div>
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</body>
+</html>

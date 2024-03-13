@@ -1,0 +1,28 @@
+{% load static %}
+<section class="discussions" style="width: 250px;">
+    <form method="get" class="discussion search">
+      <div class="searchbar">
+        <input name="searchsubmit" type="image" src="{% static 'images/search.gif' %}" value="Go" id="searchsubmit" class="btn"  style="height: 35px; width: auto; margin: 0px;">
+          <input type="text" placeholder="Search..." name="search"></input>
+        </div>
+      </form>
+
+  
+    {% for chat in chats %}
+    <a href="{% url 'one_private_chat' chat_id=chat.id  %}">
+      {% for member in chat.members.all %}
+        {% if member != request.user %}
+        <div class="discussion" >
+          <div class="photo" style="background-image: url({{ member.avatar.url }}); width: 50px;">
+          </div>
+          <div class="desc-contact">
+            <p class="name">{{ member.first_name }}</p>
+            <p class="message">{{ chat.messages.last.content }}</p>
+          </div>
+            <div class="timer">{{ chat.messages.last.timestamp }}</div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </a>
+    {% endfor %}
+  </section>

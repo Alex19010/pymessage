@@ -1,0 +1,52 @@
+{% extends 'main_register.html' %}
+{% load static %}
+
+
+{% block title %}
+  Sign in
+{% endblock %}
+
+
+{% block register %}
+  <li class="active"><a href="{% url 'register_in' %}">Sign in</a></li>
+  <li><a href="{% url 'register_up' %}">Sign up</a></li>
+{% endblock %}
+
+
+{% block travel %}
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'about' %}">About Us</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="content">
+  <div class="content_bg">
+    <div class="mainbar">
+      <div class="article">
+        <h2><span>Sign</span> in</h2>
+        <div class="clr"></div>
+        <form action="#" method="post" id="sendemail">
+          {% csrf_token %}
+          <ol>
+            <li>
+              <label for="email">Email Address (required)</label>
+              <input type="email" id="email" name="email" class="text" />
+            </li>
+            <li>
+              <label for="username">Username (required)</label>
+              <input id="username" name="username" class="text" />
+            </li>
+            <li>
+              <label for="password">Password (required)</label>
+              <input type="password" id="password" name="password" class="password" />
+            </li>
+            <li>
+              <input type="image" name="imageField" id="imageField" src="{% static 'images/submit.gif' %}" class="send" />
+              <div class="clr"></div>
+            </li>
+          </ol>
+        </form>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'group_chat/main_group_chat.html' %}
+{% load static %}
+
+{% block title %}
+  SocialNet
+{% endblock %}
+
+{% block travel %}
+  <li><a href="{% url 'private_chat' %}">Private chats</a></li>
+  <li><a href="{% url 'group_chat' %}">Group chats</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="content_bg">
+    <div class="mainbar">
+      <div class="article">
+        <h2><span>New group chat</span></h2>
+        <div class="clr"></div>
+        <form action="#" method="post" id="sendemail">
+          <ol>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create">
+          </ol>
+        </form>
+      </div>
+    </div>
+{% endblock %}

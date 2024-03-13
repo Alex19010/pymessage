@@ -1,0 +1,76 @@
+{% extends 'posts/posts_main_home.html' %}
+{% load static %}
+
+
+{% block title %}
+    Home
+{% endblock %}
+  
+
+{% block travel %}
+  <li class="active"><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'about' %}">About Us</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="content">
+    <div class="content_bg">
+      <div class="mainbar">
+        <div class="article">
+          <p class="post-data"><span class="date">{{ post.created }}</span> &nbsp;|&nbsp; Posted by <a href="#">{{ post.owner.first_name }}</a></p>
+          <img src="{{ post.image.url }}" width="613" height="193" alt="" />
+          <h2><span>{{ post.name }}</span></h2>
+          <p>{{ post.content }}</p>
+          <p class="spec"><a href="#" class="com fr">Comments {{ post.comments.count }}</a>
+            {% if post in request.user.favorites.all %}
+              <a href="{% url 'like_post' post_id=post.id %}" class="rm fl" style="background-color: burlywood;">Likes {{ post.users.count }}</a></p>
+            {% else %}
+              <a href="{% url 'like_post' post_id=post.id %}" class="rm fl">Likes {{ post.users.count }}</a></p>
+            {% endif %}
+            <h2><span>All comments</span> {{ post.comments.count }}</h2>
+            {% for comment in comments %}
+            <div class="data">
+              <div class="left">
+                <img class="photo" src="{{ comment.owner.avatar.url }}">
+              </div>
+              <div class="right">    
+                <a href="{% url 'user_posts' user_id=comment.owner.id %}" class="name">{{ comment.owner.first_name }} {{ comment.owner.last_name }}</a>
+                <br>{{ comment.content }}
+              </div>
+            </div><br>
+            {% endfor %}
+          <h2><span>Create post</span></h2>
+          <div class="clr"></div>
+          <form action="{% url 'create_comment' post_id=post.id %}" method="post" id="createpost" enctype="multipart/form-data">
+            <ol>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Create">
+            </ol>
+          </form>
+        </div>
+      </div>
+
+
+<style>
+  .data {
+      display: table-row;
+  }
+  
+  .left {
+      display: table-cell;
+      vertical-align: top;
+  }
+  
+  .right {
+      display: table-cell;
+      width: 100%;
+      padding-left: 20px;
+  }
+  
+  .photo {
+      width: 50px;
+  }
+  </style>
+{% endblock %}

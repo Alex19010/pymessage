@@ -1,0 +1,29 @@
+{% extends 'main_home.html' %}
+{% load static %}
+
+
+{% block title %}
+  SocialNet | About
+{% endblock %}
+
+
+{% block travel %}
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li class="active"><a href="{% url 'about' %}">About Us</a></li>
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+      <div class="content_bg">
+        <div class="mainbar">
+          <div class="article">
+            <h2><span>Our</span> Mission</h2>
+            <div class="clr"></div>
+              <p>PyMessage is a modern social platform designed to create and maintain social connections, exchange information, and participate in various discussions and events. The project allows users to create personal profiles, add friends, publish posts, photos, and communicate in chats and groups. With a user-friendly interface and intuitive features, users can easily find like-minded individuals, discuss topics of interest, keep track of their friends' activity, and stay up-to-date with the latest events. PyMessage aims to create a space where people can interact, share experiences, and find support within an online community.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
